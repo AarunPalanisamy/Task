@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import EnhancedTable from './component/EnhancedTable.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component{
+  constructor(props){
+  super(props);
+  this.state={
+    data:[]
+  };
+}
+componentDidMount(){
+  fetch('https://anapioficeandfire.com/api/books')
+  .then(result => result.json())
+  .then((result)=>{
+    this.setState({
+      data:result.data
+    })
+  })
+
+  console.log("Data is :",this.state);
 }
 
-export default App;
+render(){
+return (<div>It should work 
+<EnhancedTable>
+  
+  </EnhancedTable></div>
+  );
+}
+}
+
